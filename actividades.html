@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Actividades - Connect Studio</title>
+  <link rel="icon" href="C:\Users\LuisE\Downloads\Favicon Transparente.png" type="image/png" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #fff; color: #000; }
+
+    header {
+      background: #000;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo { font-weight: bold; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+
+    .menu-icons {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .menu-icons span {
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .menu-icons .perfil-btn {
+      background: white;
+      color: black;
+      padding: 0.5rem 1rem;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    h1 {
+      padding: 1rem;
+      font-size: 1.8rem;
+    }
+
+    .contenedor {
+      display: flex;
+      padding: 2rem;
+      gap: 2rem;
+    }
+
+    .perfil-alumno {
+      background: #888;
+      color: white;
+      padding: 1rem;
+      border-radius: 20px;
+      width: 240px;
+      text-align: center;
+    }
+
+    .perfil-alumno img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #111;
+      margin-top: 1rem;
+    }
+
+    .barra-progreso {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .barra-progreso span {
+      width: 20px;
+      height: 10px;
+      background: white;
+      border-radius: 4px;
+    }
+
+    .barra-progreso span.activo {
+      background: black;
+    }
+
+    .materias {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .tarjeta-materia {
+      background: black;
+      color: white;
+      border-radius: 20px;
+      width: 200px;
+      overflow: hidden;
+      text-align: center;
+      padding-bottom: 1rem;
+    }
+
+    .tarjeta-materia .imagen {
+      background: white;
+      color: black;
+      padding: 2rem;
+      font-weight: bold;
+    }
+
+    .tarjeta-materia .info {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .tarjeta-materia .nivel {
+      margin: 0.5rem 0;
+    }
+
+    .tarjeta-materia .barra-progreso {
+      justify-content: center;
+    }
+
+    .tarjeta-materia .icono-mas {
+      background: white;
+      color: black;
+      border-radius: 50%;
+      padding: 0.2rem 0.5rem;
+      font-weight: bold;
+      display: inline-block;
+      margin-left: 10px;
+    }
+
+    /* Actividades en espera */
+    .espera-container {
+      padding: 2rem;
+    }
+
+    .espera-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .espera-header .icono-pausa {
+      width: 60px;
+      height: 60px;
+      background: black;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .espera-materias {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Menú lateral */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 300px;
+      height: 100%;
+      background-color: #111;
+      color: white;
+      padding: 1.5rem 1rem;
+      transition: left 0.3s ease-in-out;
+      z-index: 1000;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .sidebar h2 {
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sidebar .cerrar-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .sidebar nav {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .sidebar nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 900;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menú lateral -->
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+  <aside class="sidebar" id="sidebar">
+    <h2>📘 Connect <span class="cerrar-btn" onclick="toggleSidebar()">✖</span></h2>
+    <nav>
+      <a href="alumno.html">🏠 Inicio</a>
+      <a href="comunidadConnect.html">💬 Chat Connect</a>
+      <a href="index.html">🔓 Cerrar sesión</a>
+    </nav>
+  </aside>
+
+  <header>
+    <div class="logo" onclick="toggleSidebar()">☰ Connect Studio</div>
+    <div class="menu-icons">
+      <span onclick="location.href='alumno.html'" title="Inicio">🏠</span>
+      <span onclick="location.href='comunidadConnect.html'" title="Comunidad">👤➕</span>
+      <span onclick="location.href='actividades.html'" title="Actividades">📖</span>
+      <span onclick="alert('Aquí se mostrarán notificaciones')" title="Notificaciones">🔔</span>
+      <span class="perfil-btn" onclick="location.href='perfil.html'">Perfil</span>
+    </div>
+  </header>
+
+  <main>
+    <h1>Actividades</h1>
+    <div class="contenedor">
+      <div class="perfil-alumno">
+        <div>🔥</div>
+        <div style="margin-top: 0.5rem;">Nivel 1</div>
+        <img src="foto_alumno.png" alt="Alumno"/>
+        <div style="margin-top: 0.5rem; font-weight: bold;">Nombre</div>
+        <div class="barra-progreso">
+          <span class="activo"></span><span class="activo"></span><span class="activo"></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="materias">
+        <div class="tarjeta-materia">
+          <div class="imagen">Imagen<br>materia</div>
+          <div class="info">
+            <strong>Instituto</strong><br>Materia
+            <div class="nivel">🔥 Nivel 1 <span class="icono-mas">+</span></div>
+            <div class="barra-progreso"><span class="activo"></span><span class="activo"></span><span></span><span></span><span></span></div>
+          </div>
+        </div>
+        <div class="tarjeta-materia">
+          <div class="imagen">Imagen<br>materia</div>
+          <div class="info">
+            <strong>Instituto</strong><br>Materia
+            <div class="nivel">🔥 Nivel 1 <span class="icono-mas">+</span></div>
+            <div class="barra-progreso"><span class="activo"></span><span class="activo"></span><span class="activo"></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección: Actividades en espera -->
+    <div class="espera-container">
+      <div class="espera-header">
+        <div class="icono-pausa">⏸</div>
+        <h1>Actividades en espera</h1>
+      </div>
+      <div class="espera-materias">
+        <div class="tarjeta-materia">
+          <div class="imagen">Imagen<br>materia</div>
+          <div class="info">
+            <strong>Instituto</strong><br>Materia
+            <div class="nivel">🔥 Nivel 1 <span class="icono-mas">+</span></div>
+            <div class="barra-progreso"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
+        </div>
+        <div class="tarjeta-materia">
+          <div class="imagen">Imagen<br>materia</div>
+          <div class="info">
+            <strong>Instituto</strong><br>Materia
+            <div class="nivel">🔥 Nivel 1 <span class="icono-mas">+</span></div>
+            <div class="barra-progreso"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
+        </div>
+        <div class="tarjeta-materia">
+          <div class="imagen">Imagen<br>materia</div>
+          <div class="info">
+            <strong>Instituto</strong><br>Materia
+            <div class="nivel">🔥 Nivel 1 <span class="icono-mas">+</span></div>
+            <div class="barra-progreso"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

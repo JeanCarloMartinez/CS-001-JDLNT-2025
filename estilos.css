@@ -1,0 +1,218 @@
+:root {
+      --negro-profundo: #1A1C1B;
+      --gris-oscuro: #2A2E2E;
+      --gris-medio: #555D58;
+      --verde-lima: #59FF00;
+      --verde-suave: #95FF77;
+      --blanco: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--negro-profundo);
+      color: var(--blanco);
+    }
+
+    header {
+      background-color: var(--negro-profundo);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      border-bottom: 2px solid var(--verde-lima);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--verde-lima);
+    }
+
+    .logo img {
+      height: 40px;
+      margin-right: 12px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      position: relative;
+    }
+
+    .nav a {
+      color: var(--blanco);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .nav a:hover {
+      color: var(--verde-suave);
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 45px;
+      right: 0;
+      background-color: var(--gris-oscuro);
+      border: 1px solid var(--verde-lima);
+      border-radius: 8px;
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+    }
+
+    .dropdown a {
+      color: var(--blanco);
+      padding: 10px 20px;
+      text-decoration: none;
+    }
+
+    .dropdown a:hover {
+      background-color: var(--verde-lima);
+      color: var(--negro-profundo);
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 80px 60px;
+      flex-wrap: wrap;
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 300px;
+      padding-right: 40px;
+    }
+
+    .hero-text h1 {
+      font-size: 40px;
+      color: var(--verde-lima);
+      margin-bottom: 20px;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      color: var(--gris-medio);
+      line-height: 1.6;
+    }
+
+    .hero-text button {
+      margin-top: 30px;
+      background-color: var(--verde-suave);
+      color: var(--negro-profundo);
+      border: none;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .hero-text button:hover {
+      background-color: var(--verde-lima);
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      min-width: 300px;
+    }
+
+    .hero-image img {
+      width: 90%;
+      max-width: 500px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(89, 255, 0, 0.3);
+    }
+
+    .section {
+      background-color: var(--gris-oscuro);
+      color: var(--blanco);
+      padding: 80px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .image-box {
+      background-color: var(--negro-profundo);
+      border: 2px dashed var(--gris-medio);
+      border-radius: 16px;
+      margin: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 280px;
+      width: 320px;
+      overflow: hidden;
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+
+    .text-box {
+      max-width: 600px;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--verde-suave);
+      margin: 20px;
+    }
+
+    .text-box p, .text-box li {
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li::marker {
+      color: var(--verde-lima);
+    }
+
+    .trust-section {
+      background-color: var(--negro-profundo);
+      text-align: center;
+      padding: 60px 40px;
+      color: var(--blanco);
+    }
+
+    .trust-section h2 {
+      color: var(--verde-lima);
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    .trust-section p {
+      color: var(--gris-medio);
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 20px;
+    }
+
+    .logo-grid div {
+      background-color: var(--gris-oscuro);
+      height: 80px;
+      border-radius: 12px;
+    }

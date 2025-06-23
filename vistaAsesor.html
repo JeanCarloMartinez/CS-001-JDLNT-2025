@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vista Asesor</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <link rel="icon" href="C:\Users\LuisE\Downloads\Favicon Transparente.png" type="image/png" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: black;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .menu-icons span {
+      font-size: 24px;
+      margin-left: 20px;
+      cursor: pointer;
+    }
+
+    .filters {
+      background-color: black;
+      color: white;
+      display: flex;
+      gap: 30px;
+      padding: 10px 20px;
+      font-size: 18px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      border: 2px solid black;
+      border-left: none;
+      border-right: none;
+      background-color: #fff;
+    }
+
+    .student-card {
+      display: flex;
+      align-items: center;
+      border: 2px solid black;
+      padding: 15px 20px;
+      background-color: white;
+      margin: 10px 0;
+    }
+
+    .student-card img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+
+    .student-name {
+      font-size: 18px;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 260px;
+      height: 100%;
+      background-color: #111;
+      color: white;
+      padding: 20px;
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+
+    .sidebar.cerrado {
+      transform: translateX(-100%);
+    }
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .sidebar-nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar-nav li {
+      font-size: 18px;
+      padding: 12px 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar-nav li:hover {
+      color: #4cd137;
+    }
+
+    .cerrar-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Barra lateral -->
+  <aside id="sidebar" class="sidebar cerrado">
+    <div class="sidebar-header">
+      <span class="sidebar-logo">🟦 Connect</span>
+      <button class="cerrar-btn" onclick="toggleSidebar()">✕</button>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li onclick="irInicio()">🏡 Inicio</li>
+        <li onclick="irComunidad()">👥 chatConAlumno</li>
+        <li onclick="irNotificaciones()">🔔 Notificaciones</li>
+        <li onclick="irPerfil()">👤 Perfil</li>
+        <li onclick="cerrarSesion()">🔓 Cerrar sesión</li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Encabezado superior -->
+  <header>
+    <div class="logo" onclick="toggleSidebar()">☰ Connect Studio</div>
+    <div class="menu-icons">
+      <span title="Inicio" onclick="irInicio()">🏡</span>
+      <span title="chatConAlumno" onclick="irComunidad()">👥</span>
+      <span title="Notificaciones" onclick="irNotificaciones()">🔔</span>
+      <span title="Perfil" onclick="irPerfil()">👤</span>
+    </div>
+  </header>
+
+  <div class="filters">
+    <div>Cuatrimestre</div>
+    <div>Carrera</div>
+  </div>
+
+  <div class="nav-tabs">
+    <div>Asesoría 1</div>
+    <div>Trabajos asignados</div>
+  </div>
+
+  <div class="student-card">
+    <img src="https://img.icons8.com/ios-filled/100/user.png" alt="Alumno" />
+    <div class="student-name">Nombre del Alumno</div>
+  </div>
+
+  <div class="student-card">
+    <img src="https://img.icons8.com/ios-filled/100/user.png" alt="Alumno" />
+    <div class="student-name">Nombre del Alumno</div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('cerrado');
+    }
+
+    function irInicio() {
+      window.location.href = 'vistaAsesor.html';
+    }
+
+    function irComunidad() {
+      window.location.href = 'chatConAlumno.html';
+    }
+
+    function irNotificaciones() {
+      window.location.href = 'notificaciones.html';
+    }
+
+    function irPerfil() {
+      window.location.href = 'perfilAsesor.html';
+    }
+
+    function cerrarSesion() {
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+
+</html>

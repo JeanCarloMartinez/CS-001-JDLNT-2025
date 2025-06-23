@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Connect Studio</title>
+  <link rel="stylesheet" href="estilos.css"/>
+  <link rel="icon" href="./Public/Assets/Icons/Logo Connect Studio.png" type="image/png" />
+  <style>
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="./Public/Assets/Icons/Logo Connect Studio.png" alt="Logo Connect Studio" />
+      Connect Studio
+    </div>
+    <div class="nav">
+      <a id="acceso-btn">Acceso ▼</a>
+      <a href="registro.html">Iniciar sesión</a>
+      <div id="dropdown" class="dropdown">
+        <a href="loginAsesor.html">Asesor</a>
+        <a href="login.html">Alumno</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Connect Studio: conecta con tu aprendizaje,<br>conecta con tu futuro.</h1>
+      <p>
+        Connect Studio ofrece un espacio colaborativo donde quienes enfrentan dificultades académicas
+        reciben asesorías de sus propios compañeros.
+      </p>
+      <button onclick="location.href='login.html'">Empieza ahora</button>
+    </div>
+    <div class="hero-image">
+      <img src="./Public/Assets/Icons/Imagen inicial.jpg" alt="Estudiantes aprendiendo" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="image-box"> 
+      <img src="./Public/Assets/Icons/asesoria.jpg" alt="Consultoría" />
+    </div>
+    <div class="text-box">
+      <p>Identificamos y comprendemos las necesidades de nuestros clientes para ofrecer soluciones innovadoras que impulsan la mejora continua y la transformación en nuestro sector.</p>
+      <p>Nos comprometemos a desarrollar y ofrecer productos creativos y vanguardistas que optimicen la experiencia de nuestros usuarios, proporcionando calidad, eficiencia y excelencia en cada interacción.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="text-box">
+      <ul>
+        <li>Diseñar y desarrollar productos que proporcionen servicios de calidad en diversas áreas.</li>
+        <li>Optimizar procesos internos y fomentar oportunidades de mejora para alcanzar la excelencia operativa.</li>
+        <li>Generar un impacto positivo y significativo en la comunidad tecnológica mediante soluciones innovadoras.</li>
+      </ul>
+    </div>
+    <div class="image-box">
+      <img src="./Public/Assets/Icons/UTTT.jpg" alt="Impacto positivo" />
+    </div>
+  </section>
+
+  <section class="trust-section">
+    <h2>Con la confianza de centros educativos y gobiernos de todo el mundo</h2>
+    <p>Conoce historias reales de cómo Connect Studio ha transformado la gestión académica y la comunicación en centros de todo el mundo</p>
+    <div class="logo-grid">
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+  </section>
+
+  <script>
+    const accesoBtn = document.getElementById('acceso-btn');
+    const dropdown = document.getElementById('dropdown');
+
+    accesoBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!accesoBtn.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

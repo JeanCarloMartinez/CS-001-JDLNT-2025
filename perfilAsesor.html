@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil Asesor</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <link rel="icon" href="C:\Users\LuisE\Downloads\Favicon Transparente.png" type="image/png" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: black;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .menu-icons {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .menu-icons img {
+      width: 24px;
+      cursor: pointer;
+    }
+
+    .perfil-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .perfil {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 600px;
+      text-align: center;
+    }
+
+    .perfil img {
+      width: 100px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .perfil h2 {
+      margin: 10px 0 5px;
+    }
+
+    .perfil p {
+      color: #666;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo" onclick="toggleSidebar()">☰ Connect Studio</div>
+    <div class="menu-icons">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/group.png" alt="Comunidad" onclick="irChat()" />
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/user.png" alt="Perfil" onclick="irPerfil()" />
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/book.png" alt="Actividades" onclick="irActividades()" />
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/appointment-reminders--v1.png" alt="Notificaciones" onclick="irNotificaciones()" />
+    </div>
+  </header>
+
+  <div class="perfil-container">
+    <div class="perfil">
+      <img src="https://img.icons8.com/ios-filled/100/user.png" alt="Asesor" />
+      <h2>Nicholas Anderson</h2>
+      <p>Cargo: Director de Carrera</p>
+      <p>Email: nicholas.anderson@example.com</p>
+      <p>Teléfono: +52 123 456 7890</p>
+    </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      window.location.href = 'vistaAsesor.html';
+    }
+
+    function irChat() {
+      window.location.href = 'chatConAlumno.html';
+    }
+
+    function irPerfil() {
+      window.location.href = 'perfilAsesor.html';
+    }
+
+    function irActividades() {
+      window.location.href = 'actividadesAsesor.html';
+    }
+
+    function irNotificaciones() {
+      window.location.href = 'notificacionesAsesor.html';
+    }
+  </script>
+</body>
+</html>
