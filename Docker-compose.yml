@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_login
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: sistema_login
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+
+  backend:
+    build: .
+    container_name: cs_login_backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
