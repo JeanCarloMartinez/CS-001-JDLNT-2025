@@ -1,0 +1,16 @@
+{
+  "name": "cs-001-jdlnt-2025-backend",
+  "version": "1.0.0",
+  "description": "Este proyecto propone una plataforma tecnológica para mejorar el rendimiento académico de estudiantes con dificultades, enfocándose en asesorías entre pares. A través de una interfaz intuitiva y colaborativa, los alumnos podrán recibir apoyo académico de compañeros, promoviendo el aprendizaje interactivo y el intercambio de conocimientos.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mysql2": "^3.14.1"
+  }
+}
