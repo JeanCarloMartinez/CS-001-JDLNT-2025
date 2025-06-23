@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel del Alumno</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <link rel="icon" href="C:\Users\LuisE\Downloads\Favicon Transparente.png" type="image/png" />
+  <style>
+    /* ====== RESET GENERAL ====== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      color: #fff;
+      line-height: 1.5;
+    }
+
+    /* ====== NAVBAR ====== */
+    .navbar {
+      background-color: #000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .navbar .left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .navbar .left h1 {
+      font-size: 1.5rem;
+    }
+
+    .icono-dropdown {
+      position: relative;
+      margin-left: 1rem;
+      cursor: pointer;
+    }
+
+    .menu-opciones {
+      display: none;
+      position: absolute;
+      top: 2rem;
+      right: 0;
+      background-color: #222;
+      border: 1px solid #444;
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      min-width: 200px;
+      z-index: 1000;
+    }
+
+    .icono-dropdown:hover .menu-opciones {
+      display: block;
+    }
+
+    .menu-opciones p {
+      margin: 0.5rem 0;
+      cursor: pointer;
+    }
+
+    .menu-opciones hr {
+      border: none;
+      border-top: 1px solid #444;
+      margin: 0.5rem 0;
+    }
+
+    /* ====== SECCIÓN NOMBRE Y NIVEL ====== */
+    #nombreAlumno {
+      font-size: 1.8rem;
+      font-weight: bold;
+      padding: 1rem 2rem;
+    }
+
+    .nivel-global {
+      display: flex;
+      align-items: center;
+      padding: 0 2rem 1rem;
+    }
+
+    .nivel-global span {
+      margin-left: 0.5rem;
+    }
+
+    .barra-progreso {
+      display: flex;
+      gap: 2px;
+      margin-left: 1rem;
+    }
+
+    .cuadro {
+      width: 15px;
+      height: 15px;
+      background-color: #222;
+      border: 1px solid #444;
+    }
+
+    .cuadro.lleno {
+      background-color: #f90;
+    }
+
+    /* ====== CURSOS ====== */
+    .cursos-container {
+      background-color: #111;
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 0 2rem 2rem;
+    }
+
+    .cursos-container h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .curso {
+      background-color: #fff;
+      color: #000;
+      border-radius: 30px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .curso-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .curso-info .barra-progreso {
+      margin-top: 0.5rem;
+    }
+
+    .estrellas {
+      font-size: 1.2rem;
+      color: #000;
+    }
+
+    /* ====== AVANCE Y GRÁFICA ====== */
+    .avance-container {
+      background-color: #111;
+      padding: 2rem;
+      margin: 0 2rem 2rem;
+      border-radius: 20px;
+    }
+
+    .avance-container h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .filtros {
+      display: flex;
+      gap: 1rem;
+      margin: 1rem 0;
+      flex-wrap: wrap;
+    }
+
+    .filtro {
+      background-color: #000;
+      padding: 0.8rem 1.2rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      border: 1px solid #444;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .icono {
+      font-size: 1rem;
+    }
+
+    .avance-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .imagen-opciones {
+      flex: 1 1 60%;
+      background-color: #000;
+      min-height: 200px;
+      border-radius: 20px;
+      border: 2px dashed #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .grafico {
+      flex: 1 1 35%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .barra-etiquetas {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .barras {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-end;
+      height: 130px;
+      width: 100%;
+    }
+
+    .barra {
+      width: 40px;
+      background-color: #fff;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .flecha-subida {
+      font-size: 2rem;
+      margin-top: 1rem;
+      align-self: flex-end;
+    }
+
+    /* ====== COMUNIDAD ====== */
+    .comunidad-studio {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .tarjeta-comunidad {
+      display: flex;
+      background-color: #fff;
+      color: #000;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+    }
+
+    .barra-lateral {
+      width: 10px;
+    }
+
+    .color1 {
+      background-color: #4caf50;
+    }
+
+    .color2 {
+      background-color: #2196f3;
+    }
+
+    .contenido-comunidad {
+      padding: 1rem;
+    }
+
+    .contenido-comunidad strong {
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .contenido-comunidad p {
+      font-size: 0.95rem;
+    }
+
+    /* ====== SIDEBAR ====== */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 240px;
+      height: 100%;
+      background-color: #111;
+      border-right: 1px solid #444;
+      z-index: 1000;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar.abierto {
+      transform: translateX(0);
+    }
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      border-bottom: 1px solid #444;
+      background-color: #000;
+    }
+
+    .sidebar-logo {
+      font-size: 1.2rem;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .cerrar-btn {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .sidebar-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .sidebar-nav ul li {
+      padding: 1rem 1.5rem;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .sidebar-nav ul li:hover {
+      background-color: #222;
+    }
+
+    /* ====== BOTÓN DE MENÚ EN NAVBAR ====== */
+    .toggle-sidebar {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="left">
+      <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+      <h1>Connect Studio</h1>
+    </div>
+
+    <div class="iconos-derecha">
+      <span class="perfil-link" onclick="irAPerfil()">👥 Perfil</span>
+
+      <div class="icono-dropdown">
+        <span title="Menú de usuario">👤</span>
+        <div class="menu-opciones">
+          <p><strong>Cuenta</strong></p>
+          <p onclick="irAPerfil()">Perfil</p>
+          <p onclick="cerrarSesion()">Cerrar sesión</p>
+          <hr />
+          <p><strong>Comunidad</strong></p>
+          <p>Solicitudes pendientes</p>
+          <p>Ver amigos</p>
+          <p>Buscar compañeros</p>
+        </div>
+      </div>
+
+      <div class="icono-dropdown" onclick="location.href='actividades.html'" style="cursor: pointer;">
+  <span title="Actividades asignadas">📖</span>
+  <div class="menu-opciones" style="display: none;">
+  </div>
+</div>
+
+      <div class="icono-dropdown">
+        <span title="Notificaciones">🔔</span>
+        <div class="menu-opciones">
+          <p>Nueva insignia obtenida</p>
+          <p>Comentario en tu grupo</p>
+          <p>Recordatorio de actividad</p>
+        </div>
+      </div>
+    </div>
+  </header>
+  <aside id="sidebar" class="sidebar cerrado">
+    <div class="sidebar-header">
+      <span class="sidebar-logo">🟦 Connect</span>
+      <button class="cerrar-btn" onclick="toggleSidebar()">✕</button>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li onclick="irInicio()">🏡 Inicio</li>
+        <li onclick="abrirChat()">💬 Chat Connect</li>
+        <li onclick="cerrarSesion()">🔓 Cerrar sesión</li>
+      </ul>
+    </nav>
+  </aside>
+
+
+
+  <main>
+    <section id="nombreAlumno">Nombre del alumno</section>
+
+    <section class="nivel-global">
+      <span>🔥</span>
+      <span>Nivel 1</span>
+      <div class="barra-progreso">
+        <div class="cuadro lleno"></div>
+        <div class="cuadro"></div>
+        <div class="cuadro"></div>
+        <div class="cuadro"></div>
+        <div class="cuadro"></div>
+        <div class="cuadro"></div>
+        <div class="cuadro"></div>
+        <div class="cuadro"></div>
+      </div>
+    </section>
+
+    <section class="cursos-container">
+      <h2>Mis cursos</h2>
+      <div class="curso">
+        <div class="curso-info">
+          <strong>Curso de Matemáticas</strong>
+          <span>Nivel 1</span>
+          <div class="barra-progreso">
+            <div class="cuadro lleno"></div>
+            <div class="cuadro lleno"></div>
+            <div class="cuadro lleno"></div>
+            <div class="cuadro"></div>
+            <div class="cuadro"></div>
+            <div class="cuadro"></div>
+          </div>
+        </div>
+        <div class="estrellas">⭐⭐⭐⭐⭐</div>
+      </div>
+
+      <div class="curso">
+        <div class="curso-info">
+          <strong>Curso de Inglés</strong>
+          <span>Nivel 1</span>
+          <div class="barra-progreso">
+            <div class="cuadro lleno"></div>
+            <div class="cuadro lleno"></div>
+            <div class="cuadro lleno"></div>
+            <div class="cuadro lleno"></div>
+            <div class="cuadro lleno"></div>
+            <div class="cuadro"></div>
+          </div>
+        </div>
+        <div class="estrellas">⭐⭐⭐⭐⭐</div>
+      </div>
+    </section>
+
+    <section class="avance-container">
+      <h2>Avance</h2>
+      <div class="filtros">
+        <div class="dropdown">
+          <button onclick="toggleDropdown('menu1')" class="dropbtn">Últimos 7 días ▾</button>
+          <div id="menu1" class="dropdown-content">
+            <a href="#">Hoy</a>
+            <a href="#">Últimos 7 días</a>
+            <a href="#">Últimos 30 días</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button onclick="toggleDropdown('menu2')" class="dropbtn">Todo el contenido ▾</button>
+          <div id="menu2" class="dropdown-content">
+            <a href="#">Lecturas</a>
+            <a href="#">Videos</a>
+            <a href="#">Prácticas</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button onclick="toggleDropdown('menu3')" class="dropbtn">Todas las actividades ▾</button>
+          <div id="menu3" class="dropdown-content">
+            <a href="#">Completadas</a>
+            <a href="#">Pendientes</a>
+            <a href="#">Saltadas</a>
+          </div>
+        </div>
+      </div>
+      <div class="avance-content">
+        <div class="imagen-opciones">Imagen de las opciones</div>
+        <div class="grafico">
+          <div class="barra-etiquetas">
+            <span>Tiempo de ejercicios</span>
+            <span>Total de aprendizaje</span>
+          </div>
+          <div class="barras">
+            <div class="barra" style="height: 40px;"></div>
+            <div class="barra" style="height: 80px;"></div>
+            <div class="barra" style="height: 120px;"></div>
+          </div>
+          <div class="flecha-subida">➚</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="avance-container">
+      <section class="comunidad-studio">
+        <h2>Comunidad Studio</h2>
+
+        <div class="filtros">
+          <div class="dropdown">
+            <button class="dropbtn" onclick="toggleDropdown('menu-recientes')">Recientes ▾</button>
+            <div class="dropdown-content" id="menu-recientes">
+              <a href="#">Recientes</a>
+              <a href="#">Antiguos</a>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <button class="dropbtn" onclick="toggleDropdown('menu-populares')">Más populares ▾</button>
+            <div class="dropdown-content" id="menu-populares">
+              <a href="#">Más populares</a>
+              <a href="#">Menos populares</a>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <button class="dropbtn" onclick="toggleDropdown('menu-grupos')">Mis grupos ▾</button>
+            <div class="dropdown-content" id="menu-grupos">
+              <a href="#">Todos mis grupos</a>
+              <a href="#">Favoritos</a>
+              <a href="#">Archivados</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aquí puedes seguir con las tarjetas de la comunidad -->
+      </section>
+
+      <div class="avance-content comunidad-studio">
+        <div class="tarjeta-comunidad">
+          <div class="barra-lateral color1"></div>
+          <div class="contenido-comunidad">
+            <strong>🗨️ María comentó en <em>"Curso de Inglés"</em></strong>
+            <p>"¡Este módulo me ayudó muchísimo a mejorar la pronunciación!"</p>
+          </div>
+        </div>
+        <div class="tarjeta-comunidad">
+          <div class="barra-lateral color2"></div>
+          <div class="contenido-comunidad">
+            <strong>📣 Nuevo grupo: <em>Práctica de conversación</em></strong>
+            <p>Únete y practica con otros estudiantes cada semana.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <<!-- Todo el contenido anterior permanece igual hasta el script final -->
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const alumnoNombre = localStorage.getItem("alumnoNombre");
+      const adminNombre = localStorage.getItem("adminNombre");
+
+      // Si detecta una sesión de administrador, redirige
+      if (adminNombre) {
+        window.location.href = "alumno.html";
+        return;
+      }
+      // Si todo está correcto, muestra el nombre del alumno
+      document.getElementById("nombreAlumno").textContent = alumnoNombre;
+    });
+
+    function irAPerfil() {
+      window.location.href = "perfil.html";
+    }
+
+    function cerrarSesion() {
+      console.log("Cerrando sesión...");
+      localStorage.removeItem("alumnoNombre");
+      window.location.href = "index.html";
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('abierto');
+      sidebar.classList.toggle('cerrado');
+    }
+
+    function irInicio() {
+      window.location.href = "index.html";
+    }
+
+    // ✅ NUEVA FUNCIÓN AGREGADA para redirigir a comunidadConnect.html
+    function abrirChat() {
+      window.location.href = "comunidadConnect.html";
+    }
+  </script>
+
+</body>
+
+</html>

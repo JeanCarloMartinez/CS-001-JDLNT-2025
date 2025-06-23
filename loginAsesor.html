@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Asesor</title>
+  <link rel="icon" href="C:\Users\LuisE\Downloads\Favicon Transparente.png" type="image/png" />
+  <style>
+    body {
+      background-color: #000;
+      font-family: Arial, sans-serif;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background: #55f900;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 0 20px #000;
+    }
+
+    .login-box img {
+      width: 60px;
+      margin-bottom: 1rem;
+    }
+
+    .login-box h2 {
+      color: #000;
+      margin-bottom: 1rem;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #000;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <img src="https://img.icons8.com/ios-filled/100/user-male-circle.png" alt="Asesor" />
+    <h2> Asesor </h2>
+
+    <input type="text" id="matricula" placeholder="Matrícula" />
+    <input type="password" id="contrasena" placeholder="Contraseña" />
+
+    <button onclick="iniciarSesionAsesor()">Iniciar sesión</button>
+
+    <p class="error" id="mensajeError"></p>
+  </div>
+
+  <script>
+    function iniciarSesionAsesor() {
+      const matricula = document.getElementById("matricula").value.trim();
+      const contrasena = document.getElementById("contrasena").value.trim();
+      const mensajeError = document.getElementById("mensajeError");
+
+      const matriculaValida = "ADM12345";
+      const contrasenaValida = "Asesor123";
+
+      if (!matricula || !contrasena) {
+        mensajeError.textContent = "Ingresa matrícula y contraseña.";
+        return;
+      }
+
+      if (matricula === matriculaValida && contrasena === contrasenaValida) {
+        localStorage.setItem("adminNombre", matricula);
+        localStorage.removeItem("alumnoNombre");
+        window.location.href = "vistaAsesor.html";
+      } else {
+        mensajeError.textContent = "Credenciales incorrectas.";
+      }
+    }
+  </script>
+</body>
+</html>

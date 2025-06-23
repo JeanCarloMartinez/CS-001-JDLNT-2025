@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chat Studio - Connect</title>
+  <link rel="icon" href="C:\Users\LuisE\Downloads\Favicon Transparente.png" type="image/png" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #000; color: #fff; }
+
+    header {
+      background: #000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 2px solid #222;
+    }
+
+    .logo { font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; gap: 10px; }
+    .logo span { color: #fff; cursor: pointer; }
+
+    .menu-icons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .menu-icons span {
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .chat-container {
+      display: flex;
+      height: calc(100vh - 80px);
+    }
+
+    .usuarios {
+      width: 260px;
+      background: #111;
+      border-right: 1px solid #444;
+      padding: 1rem;
+      overflow-y: auto;
+    }
+
+    .usuarios h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .usuario {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0.6rem;
+      border-bottom: 1px solid #333;
+      cursor: pointer;
+    }
+
+    .usuario:hover {
+      background: #222;
+    }
+
+    .usuario .circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: white;
+    }
+
+    .chat-box {
+      flex: 1;
+      display: none;
+      flex-direction: column;
+      background: #000;
+    }
+
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background: #111;
+      border-bottom: 1px solid #444;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mensaje {
+      background: #444;
+      padding: 0.8rem 1rem;
+      border-radius: 20px;
+      max-width: 60%;
+    }
+
+    .mensaje.recibido { align-self: flex-start; background: #666; }
+    .mensaje.enviado { align-self: flex-end; background: #4caf50; }
+
+    .chat-input {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      gap: 10px;
+      background: #111;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 0.8rem;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+    }
+
+    .chat-input button {
+      background: #4caf50;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.2rem;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    /* Barra lateral */
+    #barra-lateral {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 250px;
+      background: #111;
+      color: white;
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+    }
+
+    #barra-lateral header {
+      background: #000;
+      color: white;
+      padding: 1rem;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #barra-lateral ul {
+      list-style: none;
+      padding: 1rem;
+    }
+
+    #barra-lateral li {
+      margin-bottom: 1rem;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    #barra-lateral li:hover {
+      background: #222;
+      padding: 0.5rem;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra lateral -->
+  <div id="barra-lateral">
+    <header>
+      🟦 Connect
+      <span onclick="cerrarMenu()">✖</span>
+    </header>
+    <ul>
+      <li onclick="irInicio()">🏠 Inicio</li>
+      <li onclick="irComunidad()">👥 Comunidad</li>
+      <li onclick="irActividades()">📖 Actividades</li>
+      <li onclick="irChat()">💬 Chat Connect</li>
+      <li onclick="irPerfil()">👤 Perfil</li>
+      <li onclick="cerrarSesion()">🔓 Cerrar sesión</li>
+    </ul>
+  </div>
+
+  <!-- Encabezado -->
+  <header>
+    <div class="logo">
+      <span onclick="abrirMenu()">☰</span>
+      <span>Connect Studio</span>
+    </div>
+    <div class="menu-icons">
+      <span title="Inicio" onclick="irInicio()">🏠</span>
+      <span title="Comunidad" onclick="irComunidad()">👥</span>
+      <span title="Actividades" onclick="irActividades()">📖</span>
+      <span title="Notificaciones" onclick="irNotificaciones()">🔔</span>
+      <span title="Perfil" onclick="irPerfil()">👤</span>
+    </div>
+  </header>
+
+  <!-- Cuerpo principal -->
+  <div class="chat-container">
+    <aside class="usuarios" id="listaAmigos" style="display: none;">
+      <h2>Chat Studio</h2>
+    </aside>
+
+    <section class="chat-box" id="chatBox">
+      <div class="chat-header">
+        <div><strong id="nombreChat">Nombre</strong></div>
+        <div>🎥 📞 💬</div>
+      </div>
+      <div class="chat-messages" id="mensajesChat"></div>
+      <div class="chat-input">
+        <span>😊 📎</span>
+        <input type="text" placeholder="Escribe un mensaje..." />
+        <button>🎤</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function abrirMenu() {
+      document.getElementById("barra-lateral").style.display = "flex";
+    }
+
+    function cerrarMenu() {
+      document.getElementById("barra-lateral").style.display = "none";
+    }
+
+    function irInicio() {
+      window.location.href = "alumno.html";
+    }
+
+    function irComunidad() {
+      window.location.href = "comunidadConnect.html";
+    }
+
+    function irActividades() {
+      window.location.href = "actividades.html";
+    }
+
+    function irChat() {
+      window.location.href = "chat.html";
+    }
+
+    function irPerfil() {
+      window.location.href = "perfil.html";
+    }
+
+    function cerrarSesion() {
+      alert("Sesión cerrada.");
+    }
+
+    const amigos = [
+      { nombre: "María", ultimo: "Último mensaje" },
+      { nombre: "Carlos", ultimo: "Visto ayer" },
+      { nombre: "Ana", ultimo: "¡Hola!" }
+    ];
+
+    const listaAmigos = document.getElementById("listaAmigos");
+    const chatBox = document.getElementById("chatBox");
+    const nombreChat = document.getElementById("nombreChat");
+    const mensajesChat = document.getElementById("mensajesChat");
+
+    if (amigos.length > 0) {
+      listaAmigos.style.display = "block";
+      amigos.forEach(amigo => {
+        const div = document.createElement("div");
+        div.classList.add("usuario");
+        div.innerHTML = `
+          <div class="circle"></div>
+          <div><strong>${amigo.nombre}</strong><br><small>${amigo.ultimo}</small></div>
+        `;
+        div.addEventListener("click", () => {
+          chatBox.style.display = "flex";
+          nombreChat.textContent = amigo.nombre;
+          mensajesChat.innerHTML = `
+            <div class="mensaje recibido">Hola, ¿cómo estás?</div>
+            <div class="mensaje enviado">¡Hola ${amigo.nombre}! Bien, ¿y tú?</div>
+            <div class="mensaje recibido">Todo bien, gracias.</div>
+          `;
+        });
+        listaAmigos.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>

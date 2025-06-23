@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <link rel="icon" href="C:\Users\LuisE\Downloads\Favicon Transparente.png" type="image/png" />
+  <style>
+    body.login-body {
+      background-color: #000;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-wrapper {
+      background: #111;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      width: 300px;
+      color: white;
+    }
+
+    .user-icon {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .icon {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      font-size: 1rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px 10px 10px 35px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .login-btn:hover {
+      background-color: #45a049;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body class="login-body">
+  <div class="login-wrapper">
+    <div class="user-icon">👤</div>
+
+    <form class="login-form" id="loginForm">
+      <div class="input-group">
+        <span class="icon">👤</span>
+        <input type="text" id="nombre" placeholder="Nombre completo" required />
+      </div>
+
+      <div class="input-group">
+        <span class="icon">✉️</span>
+        <input type="email" id="correo" placeholder="Correo electrónico" required />
+      </div>
+
+      <div class="input-group">
+        <span class="icon">🔒</span>
+        <input type="password" id="clave" placeholder="Contraseña" required />
+      </div>
+
+      <div class="error-message" id="errorMsg"></div>
+
+      <button type="submit" class="login-btn">Iniciar Sesión</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nombre = document.getElementById("nombre").value.trim();
+      const correo = document.getElementById("correo").value.trim();
+      const clave = document.getElementById("clave").value.trim();
+      const errorMsg = document.getElementById("errorMsg");
+
+      const adminCorreo = "admin@connect.com";
+      const adminClave = "admin123";
+
+      const alumnoCorreo = "alumno@connect.com";
+      const alumnoClave = "alumno123";
+
+      if (correo === adminCorreo && clave === adminClave) {
+        window.location.href = "admin.html";
+      } else if (correo === alumnoCorreo && clave === alumnoClave) {
+        localStorage.setItem("alumnoNombre", nombre);
+        window.location.href = "alumno.html";
+      } else {
+        errorMsg.textContent = "Correo o contraseña incorrectos";
+      }
+    });
+  </script>
+</body>
+</html>

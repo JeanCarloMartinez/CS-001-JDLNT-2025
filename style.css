@@ -1,0 +1,35 @@
+body{
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.sidebar__nav{
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    overflow-x: hidden;
+    padding: 20px ;
+
+}
+.sidebar__nav a{
+    padding: 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #fff;
+    display: block;
+    text-align: justify;
+}
+.sidebar__nav a:hover{
+    color: #000;
+    font-weight: 700;
+    background-color: green;
+    border-radius: 10px;
+
+}
+.sidebar__nav i{
+    margin-right: 5px;
+}

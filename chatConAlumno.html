@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chat Con Alumno</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <link rel="icon" href="C:\Users\LuisE\Downloads\Favicon Transparente.png" type="image/png" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+    }
+
+    /* Barra lateral */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100%;
+      background-color: #111;
+      color: white;
+      padding: 20px;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+
+    .sidebar.abierta {
+      transform: translateX(0);
+    }
+
+    .sidebar .cerrar-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      float: right;
+      cursor: pointer;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 40px;
+    }
+
+    .sidebar ul li {
+      padding: 15px 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+    }
+
+    .sidebar ul li:hover {
+      background-color: #333;
+    }
+
+    /* Barra superior */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #000;
+      color: white;
+      padding: 10px 20px;
+      z-index: 999;
+      position: relative;
+    }
+
+    .topbar .logo {
+      font-weight: bold;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .topbar-icons img {
+      width: 24px;
+      margin-left: 20px;
+      cursor: pointer;
+    }
+
+    /* Contenedor principal */
+    .chat-container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    /* Lista de chats */
+    .chat-list {
+      width: 260px;
+      background-color: black;
+      color: white;
+      padding: 20px 10px;
+      overflow-y: auto;
+    }
+
+    .chat-list h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-list .chat {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-bottom: 1px solid gray;
+      cursor: pointer;
+    }
+
+    .chat .avatar {
+      width: 40px;
+      height: 40px;
+      background-color: white;
+      border-radius: 50%;
+    }
+
+    .chat .info {
+      flex: 1;
+    }
+
+    .chat .info .name {
+      font-weight: bold;
+    }
+
+    .chat .info .last-message {
+      font-size: 12px;
+      color: #ccc;
+    }
+
+    /* Área del chat */
+    .chat-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: black;
+      color: white;
+    }
+
+    .chat-header {
+      padding: 15px;
+      background-color: white;
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .chat-header .contact-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-header .contact-info .avatar {
+      width: 35px;
+      height: 35px;
+      background-color: black;
+      border-radius: 50%;
+    }
+
+    .chat-header .actions img {
+      width: 24px;
+      margin-left: 15px;
+      cursor: pointer;
+    }
+
+    .messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .message {
+      background-color: #555;
+      border-radius: 20px;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      width: fit-content;
+      max-width: 70%;
+    }
+
+    .message.from-user {
+      align-self: flex-end;
+      background-color: #444;
+    }
+
+    .input-area {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background-color: white;
+      border-top: 1px solid #ccc;
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      margin: 0 10px;
+    }
+
+    .input-area img {
+      width: 22px;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra lateral -->
+  <div id="sidebar" class="sidebar">
+    <button class="cerrar-btn" onclick="toggleSidebar()">✖</button>
+    <ul>
+      <li onclick="location.href='vistaAsesor.html'">🏠 Inicio</li>
+      <li onclick="location.href='chatConAlumno.html'">💬 Comunidad</li>
+      <li onclick="location.href='actividades.html'">📘 Actividades</li>
+      <li onclick="location.href='notificaciones.html'">🔔 Notificaciones</li>
+      <li onclick="location.href='perfilAsesor.html'">👤 Perfil</li>
+      <li onclick="location.href='index.html'">🚪 Cerrar sesión</li>
+    </ul>
+  </div>
+
+  <!-- Barra superior -->
+  <div class="topbar">
+    <div class="logo" onclick="toggleSidebar()">☰ Connect Studio</div>
+    <div class="topbar-icons">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/home.png" title="Inicio" onclick="location.href='vistaAsesor.html'" />
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/user-group-man-man.png" title="Comunidad" onclick="location.href='chatAlumno.html'" />
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/book.png" title="Actividades" onclick="location.href='actividades.html'" />
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/bell.png" title="Notificaciones" onclick="location.href='notificaciones.html'" />
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/user.png" title="Perfil" onclick="location.href='perfilAsesor.html'" />
+    </div>
+  </div>
+
+  <!-- Cuerpo del chat -->
+  <div class="chat-container">
+    <!-- Lista de chats -->
+    <div class="chat-list">
+      <h2>👥 Chat Studio</h2>
+      <div class="chat">
+        <div class="avatar"></div>
+        <div class="info">
+          <div class="name">Nombre</div>
+          <div class="last-message">Último mensaje</div>
+        </div>
+      </div>
+      <!-- Repite más -->
+    </div>
+
+    <!-- Panel de conversación -->
+    <div class="chat-panel">
+      <div class="chat-header">
+        <div class="contact-info">
+          <div class="avatar"></div>
+          <div>Nombre</div>
+        </div>
+        <div class="actions">
+          <img src="https://img.icons8.com/ios-filled/50/000000/video-call.png" title="Videollamada" />
+          <img src="https://img.icons8.com/ios-filled/50/000000/phone.png" title="Llamar" />
+          <img src="https://img.icons8.com/ios-filled/50/000000/search--v1.png" title="Buscar" />
+        </div>
+      </div>
+
+      <div class="messages">
+        <div class="message">Hola, ¿como estás?</div>
+        <div class="message from-user">Todo bien, gracias.</div>
+        <!-- Más mensajes -->
+      </div>
+
+      <div class="input-area">
+        <img src="https://img.icons8.com/ios-filled/50/000000/happy--v1.png" title="Emoji" />
+        <img src="https://img.icons8.com/ios-filled/50/000000/attach.png" title="Adjuntar" />
+        <input type="text" placeholder="Escribe un mensaje..." />
+        <img src="https://img.icons8.com/ios-filled/50/000000/microphone.png" title="Grabar audio" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Script para barra lateral -->
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("abierta");
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciar sesión | Connect Studio</title>
+  <link rel="stylesheet" href="estilos.css">
+  <link rel="icon" href="C:\Users\LuisE\Downloads\Favicon Transparente.png" type="image/png" />
+  <style>
+    body {
+      background-color: #000;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: white;
+    }
+
+    .login-container {
+      background-color: #111;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      width: 320px;
+      text-align: center;
+    }
+
+    .login-container h2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .rol-titulo {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #4CAF50;
+      margin-bottom: 1rem;
+    }
+
+    .login-form input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .login-btn,
+    .google-btn,
+    .cerrar-sesion-btn {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+
+    .login-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .google-btn {
+      background-color: #fff;
+      color: #000;
+    }
+
+    .cerrar-sesion-btn {
+      background-color: #ff4444;
+      color: white;
+    }
+
+    .forgot {
+      display: block;
+      margin-bottom: 1rem;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    .error-message,
+    .mensaje-cierre {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .error-message {
+      color: red;
+    }
+
+    .mensaje-cierre {
+      color: #4CAF50;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-container">
+    <h2><strong>Connect Studio</strong> ⬢</h2>
+    <div class="rol-titulo">Alumno</div>
+
+    <form class="login-form" id="formAlumno">
+      <input type="email" id="correoAlumno" placeholder="Correo del alumno" required>
+      <input type="password" id="claveAlumno" placeholder="Contraseña" required>
+      <a href="#" class="forgot">¿Has olvidado tu contraseña?</a>
+      <div class="error-message" id="errorAlumno"></div>
+      <button type="submit" class="login-btn">Acceder como Alumno</button>
+    </form>
+
+    <button class="google-btn"><span class="google-icon">G</span> Iniciar sesión con Google</button>
+
+  <script>
+    // Iniciar sesión
+    document.getElementById("formAlumno").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const correo = document.getElementById("correoAlumno").value.trim();
+      const clave = document.getElementById("claveAlumno").value.trim();
+      const errorMsg = document.getElementById("errorAlumno");
+
+      if (correo === "alumno@connect.com" && clave === "alumno123") {
+        localStorage.setItem("usuarioActivo", "alumno");
+        window.location.href = "alumno.html";
+      } else {
+        errorMsg.textContent = "Correo o contraseña incorrectos";
+      }
+    });
+
+    // Cerrar sesión
+    document.getElementById("cerrarSesion").addEventListener("click", function () {
+      localStorage.clear();
+      document.getElementById("mensajeCierre").textContent = "Sesión cerrada correctamente. Redirigiendo...";
+      setTimeout(() => {
+        window.location.href = "index.html"; // Página principal de Connect Studio
+      }, 1500);
+    });
+  </script>
+</body>
+</html>

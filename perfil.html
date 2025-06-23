@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Perfil - Connect Studio</title>
+  <link rel="icon" href="C:\Users\LuisE\Downloads\Favicon Transparente.png" type="image/png" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #000; color: #fff; }
+
+    header {
+      background: #000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 2px solid #222;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .menu-icons {
+      display: flex;
+      gap: 25px;
+    }
+
+    .menu-icons span {
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: white;
+    }
+
+    .menu-icons span:hover {
+      transform: scale(1.1);
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background: #111;
+      color: white;
+      transition: left 0.3s ease;
+      padding: 2rem 1rem;
+      z-index: 999;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .sidebar h2 {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar nav a:hover {
+      background-color: #333;
+    }
+
+    .perfil-container {
+      display: grid;
+      grid-template-columns: 300px 1fr 1fr;
+      gap: 20px;
+      padding: 2rem;
+    }
+
+    .perfil-sidebar {
+      background: #111;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+
+    .perfil-sidebar img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .perfil-sidebar .info {
+      margin-top: 1rem;
+    }
+
+    .info p {
+      margin: 6px 0;
+      font-size: 0.95rem;
+    }
+
+    .seccion {
+      background: #111;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .seccion h3 {
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid #333;
+      padding-bottom: 0.3rem;
+    }
+
+    .tabla-datos {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .tabla-datos td {
+      padding: 8px;
+      border-bottom: 1px solid #333;
+    }
+
+    .tabla-datos td:first-child {
+      font-weight: bold;
+      width: 40%;
+      color: #ccc;
+    }
+
+    .barra {
+      height: 10px;
+      background: #444;
+      border-radius: 5px;
+      margin: 10px 0;
+      position: relative;
+      width: 100%;
+    }
+
+    .barra span {
+      display: block;
+      height: 100%;
+      background: #4caf50;
+      border-radius: 5px;
+    }
+
+    .nivel {
+      font-size: 1.1rem;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo" onclick="toggleSidebar()">☰ Connect Studio</div>
+    <div class="menu-icons">
+      <span title="Comunidad" onclick="location.href='comunidadConnect.html'">👥</span>
+      <span title="Perfil" onclick="location.href='perfil.html'">👤</span>
+      <span title="Actividades" onclick="location.href='actividades.html'">📖</span>
+      <span title="Notificaciones" onclick="alert('Aquí se mostrarán notificaciones')">🔔</span>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <h2>Connect</h2>
+    <nav>
+      <a href="alumno.html">🏠 Inicio</a>
+      <a href="comunidadConnect.html">👥 Comunidad</a>
+      <a href="actividades.html">📖 Actividades</a>
+      <a href="comunidadConnect.html">💬 Chat Connect</a>
+      <a href="perfil.html">👤 Perfil</a>
+      <a href="index.html">⏏️ Cerrar sesión</a>
+    </nav>
+  </aside>
+
+  <!-- Contenido -->
+  <main class="perfil-container">
+    <!-- Sidebar Perfil -->
+    <div class="perfil-sidebar">
+      <img src="https://via.placeholder.com/250x250" alt="Foto de perfil">
+      <div class="info">
+        <p><strong>Nombre:</strong> Olivia Wilson</p>
+        <p><strong>Edad:</strong> 28</p>
+        <p><strong>Género:</strong> Femenino</p>
+        <p><strong>Ocupación:</strong> Marketing</p>
+        <p><strong>Educación:</strong> Licenciatura</p>
+        <p><strong>Dirección:</strong> 123 Anywhere St., Any City</p>
+      </div>
+    </div>
+
+    <!-- Columna media -->
+    <div>
+      <div class="seccion">
+        <h3>Datos personales del alumno</h3>
+        <table class="tabla-datos">
+          <tr><td>Nombre completo</td><td>Olivia Wilson</td></tr>
+          <tr><td>Edad</td><td>28</td></tr>
+          <tr><td>Género</td><td>Femenino</td></tr>
+          <tr><td>Ocupación</td><td>Marketing</td></tr>
+          <tr><td>Educación</td><td>Licenciatura en Marketing</td></tr>
+          <tr><td>Teléfono</td><td>+52 555-123-4567</td></tr>
+          <tr><td>Email</td><td>olivia@example.com</td></tr>
+          <tr><td>Dirección</td><td>123 Anywhere St., Any City</td></tr>
+        </table>
+      </div>
+
+      <div class="seccion">
+        <h3>Motivaciones</h3>
+        <p>Superación personal, trabajo en equipo, creatividad.</p>
+      </div>
+
+      <div class="seccion">
+        <h3>Objetivos</h3>
+        <ul>
+          <li>Mejorar habilidades de liderazgo</li>
+          <li>Conseguir una certificación</li>
+          <li>Ampliar red de contactos</li>
+        </ul>
+      </div>
+
+      <div class="seccion">
+        <h3>Frustraciones</h3>
+        <ul>
+          <li>Falta de tiempo</li>
+          <li>Falta de retroalimentación</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Columna derecha -->
+    <div>
+      <div class="seccion">
+        <h3>Nivel y Progreso</h3>
+        <p class="nivel"><strong>Nivel:</strong> 3 - Intermedio</p>
+        <p><strong>Progreso:</strong> 70%</p>
+        <div class="barra"><span style="width: 70%;"></span></div>
+        <p>¡Sigue así! Estás cerca de alcanzar el nivel 4.</p>
+      </div>
+
+      <div class="seccion">
+        <h3>Tecnología</h3>
+        <p>Software</p>
+        <div class="barra"><span style="width: 90%;"></span></div>
+        <p>Redes Sociales</p>
+        <div class="barra"><span style="width: 60%;"></span></div>
+        <p>Aplicaciones Móviles</p>
+        <div class="barra"><span style="width: 85%;"></span></div>
+      </div>
+
+      <div class="seccion">
+        <h3>Marcas</h3>
+        <p>Apple, Canva, Google, Adobe</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+    }
+  </script>
+
+</body>
+</html>
